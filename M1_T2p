@@ -1,0 +1,19 @@
+int pir_sensor = 3;
+volatile bool led_state = false;
+void setup()
+{
+pinMode(LED_BUILTIN, OUTPUT) ;
+pinMode(LED_BUILTIN, INTPUT) ;
+Serial.begin(9600) ;
+attachInterrupt(digitalPinToInterrupt(pir_sensor), ISR_VS, CHANGE) ;
+}
+void loop()
+{
+delay(500) ;
+}
+void ISR_VS()
+{
+led_state = !led_state;
+digitalWrite(LED_BUILTIN, led_state) ;
+Serial.printIn("Motion Detected!") ;
+}
